@@ -1,6 +1,6 @@
 // This configuration determines the base URL for API requests.
 
-const LIVE_API_URL = "https://shreeji-masala.onrender.com";
+const LIVE_API_URL = "https://shreeji-backend-xmfq.onrender.com";
 const LOCAL_API_URL = "http://127.0.0.1:5001";
 
 const isLocalhost = Boolean(
