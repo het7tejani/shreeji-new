@@ -1,15 +1,18 @@
 // This configuration determines the base URL for API requests.
 
 const LIVE_API_URL = "https://shreeji-backend-xmfq.onrender.com";
-const LOCAL_API_URL = "http://127.0.0.1:5001";
+const hostname = window.location.hostname;
 
 const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.0/8 are considered localhost for IPv4.
-    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  hostname === 'localhost' ||
+    hostname === '[::1]' ||
+    hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/) ||
+    hostname.startsWith('192.168.') ||
+    hostname.startsWith('10.') ||
+    hostname.endsWith('.local')
 );
+
+const LOCAL_API_URL = `http://${hostname === 'localhost' ? '127.0.0.1' : hostname}:5001`;
 
 // If running locally, use local backend to access new features (like WhatsApp)
 // If running on Vercel/Netlify, use the live Render backend
