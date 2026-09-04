@@ -1,38 +1,1087 @@
+
+/* ==========================================================================
+   1. Variables & Reset
+   ========================================================================== */
+:root {
+  /* Brand Colors - Professional Indigo/Slate Theme */
+  --primary-color: #4f46e5; /* Indigo 600 */
+  --primary-hover: #4338ca; /* Indigo 700 */
+  --secondary-color: #64748b; /* Slate 500 */
+  --secondary-hover: #475569; /* Slate 600 */
+  
+  /* Backgrounds */
+  --bg-body: #f8fafc; /* Slate 50 */
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-hover: #f1f5f9; /* Slate 100 */
+
+  /* Text */
+  --text-main: #0f172a; /* Slate 900 */
+  --text-secondary: #64748b; /* Slate 500 */
+  --text-muted: #94a3b8; /* Slate 400 */
+
+  /* Borders & Separators */
+  --border-color: #e2e8f0; /* Slate 200 */
+  --border-focus: #4f46e5;
+  
+  /* Status Colors */
+  --success-bg: #dcfce7; /* Green 100 */
+  --success-text: #166534; /* Green 700 */
+  --danger-bg: #fee2e2; /* Red 100 */
+  --danger-text: #b91c1c; /* Red 700 */
+  --warning-bg: #fef3c7;
+  --warning-text: #b45309;
+  --info-bg: #e0f2fe; /* Blue 100 */
+  --info-text: #0369a1; /* Blue 700 */
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+  
+  --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.dark-mode {
+  /* Dark Theme - Deep Slate */
+  --primary-color: #6366f1; /* Indigo 500 */
+  --primary-hover: #818cf8; /* Indigo 400 */
+  --secondary-color: #94a3b8;
+  --secondary-hover: #cbd5e1;
+  
+  --bg-body: #0f172a; /* Slate 900 */
+  --bg-card: #1e293b; /* Slate 800 */
+  --bg-input: #0f172a;
+  --bg-hover: #334155; /* Slate 700 */
+
+  --text-main: #f8fafc; /* Slate 50 */
+  --text-secondary: #cbd5e1; /* Slate 300 */
+  --text-muted: #64748b;
+
+  --border-color: #334155; /* Slate 700 */
+  --border-focus: #6366f1;
+  
+  --success-bg: #14532d;
+  --success-text: #dcfce7;
+  --danger-bg: #7f1d1d;
+  --danger-text: #fee2e2;
+  --info-bg: #0c4a6e;
+  --info-text: #e0f2fe;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================================
+   2. Layout & Header
+   ========================================================================== */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.5rem; /* Optimized width */
+  flex: 1;
+}
+
+.app-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 1.5rem;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem; /* Significantly larger */
+  font-weight: 900; /* Ultra bold */
+  color: var(--primary-color);
+  letter-spacing: -0.04em;
+  display: flex;
+  align-items: center;
+  /* Ensure it looks substantial */
+  text-transform: uppercase; 
+  background: linear-gradient(to right, var(--primary-color), var(--primary-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.6rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  border-radius: 0; /* Removed radius for the paint stroke effect */
+}
+
+.nav-menu a:hover {
+  color: var(--primary-color);
+  background-color: transparent; /* No hover background */
+}
+
+.nav-menu a.active {
+  color: var(--primary-color);
+  font-weight: 800;
+  /* Faded from both sides like a painting stroke */
+  background: linear-gradient(90deg, transparent 0%, rgba(79, 70, 229, 0.2) 50%, transparent 100%);
+}
+
+/* Dark mode override for active tab */
+body.dark-mode .nav-menu a.active {
+    background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.25) 50%, transparent 100%);
+    color: #818cf8;
+}
+
+
+.nav-indicator {
+  display: none;
+}
+
+.separator {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+    margin: 0 0.5rem;
+}
+
+.theme-toggle, .settings-icon-link {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: var(--radius-full);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover, .settings-icon-link:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+/* Offline Banner */
+.offline-banner {
+    background-color: #334155;
+    color: #fff;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: sticky;
+    top: 80px; /* Height of header */
+    z-index: 49;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   3. Cards & Containers
+   ========================================================================== */
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-container {
+    width: 100%;
+}
+
+.page-container > h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    letter-spacing: -0.025em;
+}
+
+/* ==========================================================================
+   4. Forms & Inputs
+   ========================================================================== */
+.form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: var(--secondary-color);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+input:disabled {
+    background-color: var(--bg-hover);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Hide number spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.customer-info-display {
+    background-color: var(--bg-hover);
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    color: var(--text-main);
+    border: 1px solid transparent;
+}
+
+.customer-info-display.placeholder {
+    color: var(--text-muted);
+    background-color: transparent;
+    border: 1px dashed var(--border-color);
+}
+
+/* Round Checkbox for Marketing */
+.round-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition: all 0.2s ease;
+  background-color: var(--bg-input);
+  flex-shrink: 0;
+}
+
+.round-checkbox:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.round-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.round-checkbox:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Upload Box for Marketing */
+.upload-box {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--bg-body); /* Slightly distinct from card */
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.upload-box:hover {
+    border-color: var(--primary-color);
+    background-color: var(--bg-hover);
+    color: var(--primary-color);
+}
+
+.upload-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 0.5rem;
+  line-height: 1.2;
 }
 
-.App-link {
-  color: #61dafb;
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-hover);
+  border-color: var(--secondary-color);
+}
+
+.btn-danger {
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: #fecaca; 
+}
+body.dark-mode .btn-danger:hover:not(:disabled) {
+    background-color: #991b1b;
+}
+
+.btn-success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+}
+.btn-whatsapp:hover {
+    background-color: #20bd5a;
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.btn-pill {
+    border-radius: 9999px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.btn-remove {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.btn-remove:hover {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+}
+.btn-link:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   6. Tables
+   ========================================================================== */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+}
+
+.styled-table thead {
+    background-color: var(--bg-hover);
+}
+
+.styled-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.styled-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.styled-table tbody tr {
+    background-color: var(--bg-card);
+    transition: background-color 0.15s ease;
+}
+
+.text-right { text-align: right !important; }
+.text-center { text-align: center !important; }
+
+.billing-table input {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 0.4rem;
+    text-align: right;
+    border-radius: 4px;
+}
+.billing-table input:focus {
+    background-color: var(--bg-input);
+    border-color: transparent;
+    box-shadow: none;
+    outline: none;
+}
+.billing-table .out-of-stock {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+/* ==========================================================================
+   7. Dashboard Specifics
+   ========================================================================== */
+.customer-section {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.customer-details-card, .purchase-history-card {
+    height: 300px; /* Shortened height */
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+.scrollable-content::-webkit-scrollbar { width: 4px; }
+.scrollable-content::-webkit-scrollbar-track { background: transparent; }
+.scrollable-content::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+.summary-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.summary-group {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-item label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.summary-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.summary-input {
+    width: 100px;
+    text-align: right;
+    padding: 0.4rem;
+}
+
+.amount-to-pay {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.bill-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   8. Stock & Tabs (Updated)
+   ========================================================================== */
+.stock-grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Simplified to single column for overview */
+    gap: 1.5rem;
+}
+
+/* New Segmented Control Tab Styling */
+.tab-navigation {
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-md);
+    padding: 0.25rem;
+    display: inline-flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-main);
+}
+
+.tab-btn:hover {
+    color: var(--text-main);
+}
+
+.tab-btn.active {
+    background-color: var(--bg-card);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+}
+
+/* Audit Trail Badges */
+.audit-badge {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.audit-badge.purchase {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+
+.audit-badge.sale {
+    background-color: var(--info-bg);
+    color: var(--info-text);
+}
+
+.audit-positive {
+    color: var(--success-text);
+    font-weight: 600;
+}
+
+.audit-negative {
+    color: var(--danger-text);
+    font-weight: 600;
+}
+
+.stock-number {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   9. Settings Layout
+   ========================================================================== */
+.settings-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.settings-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 95px; /* Header height (80px) + 15px gap */
+    height: calc(100vh - 110px); /* Full viewport height minus margin */
+    overflow: hidden; /* Prevent scrolling of the sidebar itself */
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-sidebar li {
+    margin-bottom: 0.25rem;
+}
+
+.btn-link-menu {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-link-menu:hover {
+    background-color: var(--bg-hover);
+    color: var(--primary-color);
+}
+
+.btn-link-menu.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.settings-content {
+    background-color: transparent;
+    width: 100%;
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   10. Authentication
+   ========================================================================== */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-body) 0%, var(--border-color) 100%);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   11. Analytics & Charts
+   ========================================================================== */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Span helpers */
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+
+/* Stat Cards */
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card.income { border-top: 4px solid var(--success-text); }
+.stat-card.expense { border-top: 4px solid var(--danger-text); }
+.stat-card.profit { border-top: 4px solid var(--info-text); background: var(--info-bg); color: var(--info-text); border: none; }
+.stat-card.loss { border-top: 4px solid var(--danger-text); background: var(--danger-bg); color: var(--danger-text); border: none; }
+
+.stat-label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+.stat-value { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+.stat-sub { font-size: 0.85rem; opacity: 0.7; }
+
+/* Charts */
+.chart-card {
+    min-height: 300px;
+    padding: 1.5rem;
+}
+
+.chart-container {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.chart-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Line Chart */
+.line-chart svg { width: 100%; height: 100%; overflow: visible; }
+.chart-legend { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; font-size: 0.85rem; }
+
+/* Bar Chart */
+.bar-chart { align-items: flex-end; padding-bottom: 2rem; gap: 2rem; justify-content: center; }
+.bar-group { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; width: 60px; }
+.bar { width: 100%; border-radius: 4px 4px 0 0; position: relative; min-height: 4px; transition: height 0.5s ease-out; }
+.bar.income { background-color: var(--success-text); }
+.bar.expense { background-color: var(--danger-text); }
+.bar-value { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.bar-label { position: absolute; bottom: -25px; font-size: 0.85rem; font-weight: 500; }
+
+/* Donut Chart */
+.donut-chart-wrapper { display: flex; align-items: center; justify-content: center; height: 220px; gap: 2rem; }
+.donut-chart { width: 160px; height: 160px; transform: rotate(-90deg); }
+.chart-text { fill: var(--text-main); font-size: 0.4rem; font-weight: bold; text-anchor: middle; transform: rotate(90deg); transform-origin: center; }
+.chart-legend.horizontal { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+.legend-item .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* Asset Grid */
+.assets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.asset-item { display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-hover); border-radius: var(--radius-md); align-items: center; }
+.asset-item.total { grid-column: span 2; background: var(--bg-card); border: 2px solid var(--primary-color); }
+.asset-label { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+.asset-value { font-weight: 700; font-size: 1.1rem; }
+.asset-value.danger { color: var(--danger-text); }
+.asset-value.primary { color: var(--primary-color); font-size: 1.25rem; }
+
+/* Ranking List */
+.ranking-list { list-style: none; padding: 0; margin: 0; }
+.ranking-list li { display: flex; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
+.ranking-list li:last-child { border-bottom: none; }
+.ranking-list .rank { font-weight: 700; color: var(--text-muted); width: 30px; }
+.ranking-list .name { flex: 1; font-weight: 500; }
+.ranking-list .val { font-weight: 700; }
+.ranking-list .val.success { color: var(--success-text); }
+.ranking-list .empty { justify-content: center; color: var(--text-muted); font-style: italic; }
+
+/* ==========================================================================
+   12. Modals & Toasts
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.toast-notification {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideIn 0.3s ease-out;
+    min-width: 300px;
+}
+.toast-notification.success { border-left: 4px solid var(--success-text); }
+.toast-notification.error { border-left: 4px solid var(--danger-text); }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.toast-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-left: auto;
+}
+
+/* ==========================================================================
+   13. Marketing Queue
+   ========================================================================== */
+.marketing-queue-list {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--bg-input);
+}
+
+.queue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+}
+
+.queue-item:last-child {
+  border-bottom: none;
+}
+
+.queue-item.active {
+  background-color: var(--info-bg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.queue-item.sent {
+  background-color: var(--bg-hover);
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.queue-item .status-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+
+.progress-container {
+  height: 8px;
+  background-color: var(--bg-hover);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--success-text);
+  transition: width 0.3s ease;
+}
+
+.floating-action-bar {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   14. Responsive
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .customer-section {
+        grid-template-columns: 1fr;
+    }
+    .customer-details-card { height: auto; min-height: auto; }
+    .settings-layout { grid-template-columns: 1fr; }
+    .settings-sidebar { position: static; height: auto; width: 100%; overflow-x: auto; display: flex; border-bottom: 1px solid var(--border-color); border-radius: var(--radius-lg) var(--radius-lg) 0 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
+    .settings-sidebar ul { display: flex; width: 100%; }
+    .settings-sidebar li { margin: 0; flex: 1; }
+    .btn-link-menu { text-align: center; border-radius: 0; white-space: nowrap; }
+    .settings-content { border-top-left-radius: 0; border-top-right-radius: 0; }
+    .stock-grid-container { grid-template-columns: 1fr; }
+    
+    /* Analytics Responsive */
+    .analytics-grid { grid-template-columns: 1fr 1fr; }
+    .span-3 { grid-column: span 2; }
+    .assets-grid { grid-template-columns: 1fr; }
+    .asset-item.total { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+    .header-container { flex-direction: column; height: auto; padding: 1rem 0; gap: 1rem; }
+    .nav-links { width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.5rem; }
+    .summary-footer { flex-direction: column; align-items: stretch; }
+    .summary-group { flex-wrap: wrap; justify-content: space-between; }
+    .bill-actions { flex-direction: column; }
+    .bill-actions button { width: 100%; }
+    
+    /* Analytics Mobile */
+    .analytics-grid { grid-template-columns: 1fr; }
+    .span-2, .span-3 { grid-column: span 1; }
+    .stat-card { padding: 1rem; }
+    .stat-value { font-size: 1.5rem; }
 }

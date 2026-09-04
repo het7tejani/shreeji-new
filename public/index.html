@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#4f46e5" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Spice Management Application for Retailers and Wholesalers"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -24,7 +24,14 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Spice Manager</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +46,29 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+          "react": "https://aistudiocdn.com/react@^19.2.0",
+          "@testing-library/jest-dom": "https://aistudiocdn.com/@testing-library/jest-dom@^6.9.1",
+          "@testing-library/react": "https://aistudiocdn.com/@testing-library/react@^16.3.0",
+          "web-vitals": "https://aistudiocdn.com/web-vitals@^5.1.0",
+          "jspdf": "https://aistudiocdn.com/jspdf@^3.0.4",
+          "jspdf-autotable": "https://aistudiocdn.com/jspdf-autotable@^5.0.2",
+          "workbox-expiration": "https://aistudiocdn.com/workbox-expiration@^7.4.0",
+          "workbox-routing": "https://aistudiocdn.com/workbox-routing@^7.4.0",
+          "workbox-core": "https://aistudiocdn.com/workbox-core@^7.4.0",
+          "workbox-strategies": "https://aistudiocdn.com/workbox-strategies@^7.4.0",
+          "workbox-precaching": "https://aistudiocdn.com/workbox-precaching@^7.4.0",
+          "react-hook-form": "https://aistudiocdn.com/react-hook-form@^7.66.1",
+          "zod": "https://aistudiocdn.com/zod@^4.1.12",
+          "@hookform/resolvers/": "https://aistudiocdn.com/@hookform/resolvers@^5.2.2/",
+          "@tanstack/react-query": "https://aistudiocdn.com/@tanstack/react-query@^5.90.10",
+          "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
+        }
+      }
+    </script>
   </body>
 </html>
