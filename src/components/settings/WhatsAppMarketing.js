@@ -10,6 +10,7 @@ const WhatsAppMarketing = () => {
     
     // Backend Status
     const [serverStatus, setServerStatus] = useState('LOADING'); // INITIALIZING, QR_READY, CONNECTING, READY, ERROR
+    const [statusDetail, setStatusDetail] = useState('');
     const [qrCode, setQrCode] = useState(null);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const [sending, setSending] = useState(false);
@@ -35,6 +36,7 @@ const WhatsAppMarketing = () => {
             if (res.ok) {
                 const data = await res.json();
                 setServerStatus(data.status);
+                setStatusDetail(data.detail || '');
                 if (data.status === 'QR_READY') {
                     setQrCode(data.qrCode);
                 }
@@ -219,6 +221,20 @@ const WhatsAppMarketing = () => {
                 >
                     Stuck? Reset Bot
                 </button>
+            </div>
+        );
+    }
+
+    if (serverStatus === 'ERROR') {
+        return (
+            <div className="card" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px'}}>
+                <div style={{textAlign: 'center', color: 'var(--danger-text)'}}>
+                    <h3>⚠️ WhatsApp Error</h3>
+                    <p>{statusDetail || 'Server પર WhatsApp શરૂ થઈ શક્યું નથી.'}</p>
+                    <button className="btn btn-sm btn-secondary" onClick={handleResetBot} style={{marginTop: '1rem'}}>
+                        Reset Bot
+                    </button>
+                </div>
             </div>
         );
     }
