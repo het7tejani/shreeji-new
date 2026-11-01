@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import API_BASE_URL from '../apiConfig';
+import { apiFetch } from '../api';
 
 const DuesDashboard = ({ user }) => {
   const [dues, setDues] = useState([]);
@@ -18,7 +18,7 @@ const DuesDashboard = ({ user }) => {
       setError(null);
       
       // Fetch only Retail dues
-      const response = await fetch(`${API_BASE_URL}/api/customers/dues?type=Retail`);
+      const response = await apiFetch(`/api/customers/dues?type=Retail`);
       
       if (!response.ok) {
         throw new Error('બાકી રકમ મેળવવામાં નિષ્ફળ:');
@@ -57,7 +57,7 @@ const DuesDashboard = ({ user }) => {
     }
     
     try {
-        const response = await fetch(`${API_BASE_URL}/api/customers/settle-due`, {
+        const response = await apiFetch(`/api/customers/settle-due`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ saleId, amount }),
@@ -84,7 +84,7 @@ const DuesDashboard = ({ user }) => {
 
     try {
       // Fetch retail ledger
-      const response = await fetch(`${API_BASE_URL}/api/customers/ledger/${customer._id}?type=Retail`);
+      const response = await apiFetch(`/api/customers/ledger/${customer._id}?type=Retail`);
       if (!response.ok) throw new Error('Failed to fetch ledger');
       const data = await response.json();
       setCustomerHistory({

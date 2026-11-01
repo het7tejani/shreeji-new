@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const WholesaleDues = ({ user }) => {
     const [wholesaleDues, setWholesaleDues] = useState([]);
@@ -22,7 +22,7 @@ const WholesaleDues = ({ user }) => {
     const fetchWholesaleDues = async () => {
         setLoadingWholesale(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/customers/wholesale/summary`);
+            const response = await apiFetch(`/api/customers/wholesale/summary`);
             if (!response.ok) throw new Error('જથ્થાબંધ સારાંશ બતાવવામાં નિષ્ફળ થયાં');
             const data = await response.json();
             setWholesaleDues(data);
@@ -36,7 +36,7 @@ const WholesaleDues = ({ user }) => {
     const fetchLedger = async (customerId) => {
         setLoadingWholesale(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/customers/ledger/${customerId}`);
+            const response = await apiFetch(`/api/customers/ledger/${customerId}`);
             if (!response.ok) throw new Error('ખાતાવહી બતાવવામાં નિષ્ફળ');
             const data = await response.json();
             
@@ -141,7 +141,7 @@ const WholesaleDues = ({ user }) => {
 
         setIsPaymentProcessing(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/customers/wholesale/pay`, {
+            const res = await apiFetch(`/api/customers/wholesale/pay`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ customerId: selectedWholesaler, amount })

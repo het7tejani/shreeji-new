@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import API_BASE_URL from '../apiConfig';
+import { apiFetch } from '../api';
 
 const PasswordPromptModal = ({ isOpen, onClose, onVerify, user }) => {
   const [password, setPassword] = useState('');
@@ -21,11 +21,11 @@ const PasswordPromptModal = ({ isOpen, onClose, onVerify, user }) => {
     setError('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/verify`, {
+      const response = await apiFetch(`/api/auth/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: user.username, password }),
-      });
+      }, { redirectOn401: false });
 
       // Check content type before parsing JSON to avoid crashes
       const contentType = response.headers.get("content-type");

@@ -7,7 +7,7 @@ import CustomerSearch from './dashboard/CustomerSearch';
 import BillingTable from './dashboard/BillingTable';
 import BillSummary from './dashboard/BillSummary';
 import html2canvas from 'html2canvas';
-import API_BASE_URL from '../apiConfig';
+import { apiFetch } from '../api';
 
 function Dashboard({ spices, onStockUpdate }) {
   const [lastBill, setLastBill] = useState(null);
@@ -88,7 +88,7 @@ function Dashboard({ spices, onStockUpdate }) {
 
   const fetchSalesHistory = async (mobile) => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/customers/sales/${mobile}`);
+        const res = await apiFetch(`/api/customers/sales/${mobile}`);
         if (res.ok) {
             const data = await res.json();
             setSalesHistory(data);
@@ -165,7 +165,7 @@ function Dashboard({ spices, onStockUpdate }) {
       };
 
       try {
-        const res = await fetch(`${API_BASE_URL}/api/spices/sell`, {
+        const res = await apiFetch(`/api/spices/sell`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -244,7 +244,7 @@ function Dashboard({ spices, onStockUpdate }) {
           };
 
           // 3. Send via Backend Bot
-          const res = await fetch(`${API_BASE_URL}/api/whatsapp/send`, {
+          const res = await apiFetch(`/api/whatsapp/send`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)

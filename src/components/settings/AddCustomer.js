@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const AddCustomer = () => {
     // Shared State
@@ -44,7 +44,7 @@ const AddCustomer = () => {
         setMessage({ type: '', text: '' });
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/customers/add`, {
+            const response = await apiFetch(`/api/customers/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, mobileNumber, address, notes, category })
@@ -150,7 +150,7 @@ const AddCustomer = () => {
         setMessage({ type: '', text: '' });
 
         try {
-            const res = await fetch(`${API_BASE_URL}/api/customers/bulk-add`, {
+            const res = await apiFetch(`/api/customers/bulk-add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ customers: bulkData })

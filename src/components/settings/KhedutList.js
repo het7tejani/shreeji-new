@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const KhedutList = () => {
     const [kheduts, setKheduts] = useState([]);
@@ -16,7 +16,7 @@ const KhedutList = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch(`${API_BASE_URL}/api/purchases/vendors`);
+            const response = await apiFetch(`/api/purchases/vendors`);
             if (!response.ok) {
                 throw new Error(`Failed to fetch vendors (Status: ${response.status})`);
             }

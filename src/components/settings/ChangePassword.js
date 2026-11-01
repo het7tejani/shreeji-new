@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const ChangePassword = ({ user }) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -28,7 +28,7 @@ const ChangePassword = ({ user }) => {
         setIsProcessing(true);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/auth/change-password`, {
+            const response = await apiFetch(`/api/auth/change-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 

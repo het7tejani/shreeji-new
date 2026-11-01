@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const ManageSpices = ({ spices, onUpdateSpices, user }) => {
     const [newSpiceName, setNewSpiceName] = useState('');
@@ -12,7 +12,7 @@ const ManageSpices = ({ spices, onUpdateSpices, user }) => {
         if (!newSpiceName.trim()) return;
         
         try {
-            const res = await fetch(`${API_BASE_URL}/api/spices/add`, {
+            const res = await apiFetch(`/api/spices/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newSpiceName, category: newSpiceCategory })
@@ -37,7 +37,7 @@ const ManageSpices = ({ spices, onUpdateSpices, user }) => {
     const handleDeleteSpice = async (id, name) => {
         if (window.confirm(`Are you sure you want to delete ${name}? Historical records will be preserved.`)) {
             try {
-                const res = await fetch(`${API_BASE_URL}/api/spices/${id}`, { method: 'DELETE' });
+                const res = await apiFetch(`/api/spices/${id}`, { method: 'DELETE' });
                 
                 // Safe JSON check
                 const contentType = res.headers.get("content-type");

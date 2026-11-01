@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const WhatsAppMarketing = () => {
     const [customers, setCustomers] = useState([]);
@@ -32,7 +32,7 @@ const WhatsAppMarketing = () => {
 
     const checkStatus = async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/api/whatsapp/status`);
+            const res = await apiFetch(`/api/whatsapp/status`);
             if (res.ok) {
                 const data = await res.json();
                 setServerStatus(data.status);
@@ -52,7 +52,7 @@ const WhatsAppMarketing = () => {
     const fetchCustomers = async () => {
         setLoadingCustomers(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/customers`);
+            const response = await apiFetch(`/api/customers`);
             if (!response.ok) throw new Error('Failed to fetch customers');
             const data = await response.json();
             
@@ -77,7 +77,7 @@ const WhatsAppMarketing = () => {
         
         setServerStatus('LOADING');
         try {
-            await fetch(`${API_BASE_URL}/api/whatsapp/logout`, { method: 'POST' });
+            await apiFetch(`/api/whatsapp/logout`, { method: 'POST' });
             // Status update will be picked up by next poll
         } catch (e) {
             console.error("Disconnect failed", e);
@@ -90,7 +90,7 @@ const WhatsAppMarketing = () => {
 
         setServerStatus('LOADING');
         try {
-            await fetch(`${API_BASE_URL}/api/whatsapp/restart`, { method: 'POST' });
+            await apiFetch(`/api/whatsapp/restart`, { method: 'POST' });
             alert("Bot is restarting. Please wait 1 minute for the QR code to appear.");
         } catch (e) {
             console.error("Restart failed", e);
@@ -153,7 +153,7 @@ const WhatsAppMarketing = () => {
                 image: imageBase64
             };
 
-            const res = await fetch(`${API_BASE_URL}/api/whatsapp/send`, {
+            const res = await apiFetch(`/api/whatsapp/send`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

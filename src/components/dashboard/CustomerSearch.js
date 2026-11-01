@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const CustomerSearch = ({ mobile, name, address, onFormChange, onCustomerSelect }) => {
   const [debouncedMobile, setDebouncedMobile] = useState('');
@@ -38,7 +38,7 @@ const CustomerSearch = ({ mobile, name, address, onFormChange, onCustomerSelect 
 
         setIsLoading(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/customers/lookup/${debouncedMobile}`);
+            const res = await apiFetch(`/api/customers/lookup/${debouncedMobile}`);
             if (res.ok) {
                 const customer = await res.json();
                 setFoundCustomer(customer);

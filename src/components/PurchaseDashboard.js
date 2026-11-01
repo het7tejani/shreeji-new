@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Receipt from './Receipt';
 import { generateInvoicePDF } from '../utils/pdfGenerator';
-import API_BASE_URL from '../apiConfig';
+import { apiFetch } from '../api';
 
 const PurchaseDashboard = ({ spices, onStockUpdate, user }) => {
   const [vendorName, setVendorName] = useState('');
@@ -121,7 +121,7 @@ const PurchaseDashboard = ({ spices, onStockUpdate, user }) => {
     };
 
     try {
-        const response = await fetch(`${API_BASE_URL}/api/purchases/purchase`, {
+        const response = await apiFetch(`/api/purchases/purchase`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(purchasePayload),

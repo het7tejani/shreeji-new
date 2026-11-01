@@ -11,7 +11,7 @@ import DuesDashboard from './components/DuesDashboard';
 import Settings from './components/Settings';
 import NotFound from './components/NotFound';
 import Auth from './components/Auth';
-import API_BASE_URL from './apiConfig';
+import { apiFetch } from './api';
 
 function App() {
   // Auth State
@@ -30,7 +30,7 @@ function App() {
     if (!user) return;
     setSpicesLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/spices`);
+      const response = await apiFetch(`/api/spices`);
       
       // Check if response is valid JSON
       const contentType = response.headers.get("content-type");

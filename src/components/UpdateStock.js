@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import API_BASE_URL from '../apiConfig';
+import { apiFetch } from '../api';
 
 const UpdateStock = ({ user }) => {
   const [spices, setSpices] = useState([]);
@@ -28,7 +28,7 @@ const UpdateStock = ({ user }) => {
   const fetchSpices = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/spices`);
+      const res = await apiFetch(`/api/spices`);
       const data = await res.json();
       setSpices(data);
       setInputs({}); // Reset inputs on fetch
@@ -104,7 +104,7 @@ const UpdateStock = ({ user }) => {
     try {
       // Using /purchase endpoint ensures stock is incremented ($inc) 
       // AND it creates a transaction record for Revenue calculation.
-      const res = await fetch(`${API_BASE_URL}/api/spices/purchase`, {
+      const res = await apiFetch(`/api/spices/purchase`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
