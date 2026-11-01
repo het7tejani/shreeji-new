@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API_BASE_URL from '../apiConfig';
 
 const Auth = ({ onLogin }) => {
@@ -7,6 +6,13 @@ const Auth = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Wake the backend as soon as the login screen opens. The server can be
+  // asleep after an idle period; starting it while the user types their
+  // credentials hides most of that startup wait from the login itself.
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/`).catch(() => {});
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +38,7 @@ const Auth = ({ onLogin }) => {
         throw new Error(data.msg || 'Authentication failed');
       }
 
-      onLogin({ username });
+      onLogin({ username, token: data.token });
     } catch (err) {
       console.error("Login Error:", err);
       setError(err.message);

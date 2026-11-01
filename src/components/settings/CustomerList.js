@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const CustomerList = () => {
     const [customers, setCustomers] = useState([]);
@@ -16,7 +16,7 @@ const CustomerList = () => {
         setLoadingCustomers(true);
         setError('');
         try {
-            const response = await fetch(`${API_BASE_URL}/api/customers`);
+            const response = await apiFetch(`/api/customers`);
             if (!response.ok) {
                 throw new Error(`ગ્રાહકોને લાવવામાં નિષ્ફળ (Status: ${response.status})`);
             }
@@ -33,7 +33,7 @@ const CustomerList = () => {
     const handleDelete = async (id, name) => {
         if (window.confirm(`ચેતવણી: ${name} ને ડિલીટ કરવાથી તેમનો તમામ ખરીદ/વેચાણ ઈતિહાસ અને ઉધાર ડેટા કાયમ માટે નાશ પામશે.\n\nશું તમે આગળ વધવા માંગો છો?`)) {
             try {
-                const res = await fetch(`${API_BASE_URL}/api/customers/${id}`, { method: 'DELETE' });
+                const res = await apiFetch(`/api/customers/${id}`, { method: 'DELETE' });
                 const data = await res.json();
                 
                 if (res.ok) {

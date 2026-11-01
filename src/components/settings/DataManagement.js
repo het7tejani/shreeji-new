@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import PasswordPromptModal from '../PasswordPromptModal';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const DataManagement = ({ user }) => {
     const [isResetting, setIsResetting] = useState(false);
@@ -10,7 +10,7 @@ const DataManagement = ({ user }) => {
 
     const handleExportData = async () => {
         try {
-          const response = await fetch(`${API_BASE_URL}/api/settings/export`);
+          const response = await apiFetch(`/api/settings/export`);
           if (!response.ok) throw new Error('Export failed');
           
           const blob = await response.blob();
@@ -41,7 +41,7 @@ const DataManagement = ({ user }) => {
     const performResetApi = async () => {
         setIsResetting(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/settings/reset-financial-year`, {
+            const res = await apiFetch(`/api/settings/reset-financial-year`, {
                 method: 'POST'
             });
             const data = await res.json();

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const AuditTrail = () => {
     const [auditData, setAuditData] = useState([]);
@@ -16,8 +16,8 @@ const AuditTrail = () => {
         setError('');
         try {
           const [purchaseRes, salesRes] = await Promise.all([
-              fetch(`${API_BASE_URL}/api/purchases`),
-              fetch(`${API_BASE_URL}/api/sales`)
+              apiFetch(`/api/purchases`),
+              apiFetch(`/api/sales`)
           ]);
   
           // Check for HTML error pages before parsing
@@ -87,7 +87,7 @@ const AuditTrail = () => {
         if (window.confirm(confirmMsg)) {
             try {
                 const endpoint = isSale ? '/api/sales/delete' : '/api/purchases/delete';
-                const res = await fetch(`${API_BASE_URL}${endpoint}?id=${record.id}`, { method: 'DELETE' });
+                const res = await apiFetch(`${endpoint}?id=${record.id}`, { method: 'DELETE' });
                 
                 // Robust JSON check
                 const contentType = res.headers.get("content-type");

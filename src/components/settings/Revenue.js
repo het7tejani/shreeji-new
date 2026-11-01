@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
-import API_BASE_URL from '../../apiConfig';
+import { apiFetch } from '../../api';
 
 const Revenue = () => {
     // Global Dashboard Period
@@ -51,7 +51,7 @@ const Revenue = () => {
         setLoading(true);
         try {
             const queryParams = new URLSearchParams({ period });
-            const res = await fetch(`${API_BASE_URL}/api/settings/revenue?${queryParams}`);
+            const res = await apiFetch(`/api/settings/revenue?${queryParams}`);
             if (!res.ok) throw new Error('Failed to fetch analytics');
             let result = await res.json();
 
@@ -90,7 +90,7 @@ const Revenue = () => {
                 endDate: formatDate(endDate)
             });
 
-            const res = await fetch(`${API_BASE_URL}/api/settings/revenue?${queryParams}`);
+            const res = await apiFetch(`/api/settings/revenue?${queryParams}`);
             if (!res.ok) throw new Error('Failed to fetch graph data');
             let result = await res.json();
 
@@ -109,7 +109,7 @@ const Revenue = () => {
     const fetchPurchaseDues = async () => {
         setLoadingLiabilities(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/purchases/dues`);
+            const res = await apiFetch(`/api/purchases/dues`);
             if (res.ok) {
                 const data = await res.json();
                 setPurchaseDues(data);
@@ -142,7 +142,7 @@ const Revenue = () => {
         }
 
         try {
-            const res = await fetch(`${API_BASE_URL}/api/purchases/settle`, {
+            const res = await apiFetch(`/api/purchases/settle`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
